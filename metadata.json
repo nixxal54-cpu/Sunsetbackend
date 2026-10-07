@@ -1,0 +1,6 @@
+{
+  "name": "Z.ai GLM-4.7-Flash Streaming Backend",
+  "description": "Production-ready OpenAI-compatible streaming backend proxy for Z.ai GLM-4.7-Flash with SSE, rate limiting, and client abort handling.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
