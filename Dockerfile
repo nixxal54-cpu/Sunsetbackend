@@ -4,10 +4,10 @@ FROM node:22-alpine AS builder
 WORKDIR /app
 
 # Copy package manifests
-COPY package.json ./
+COPY package.json package-lock.json* ./
 
 # Install all dependencies for build
-RUN npm install
+RUN npm ci || npm install --legacy-peer-deps
 
 # Copy source code and config
 COPY . .
@@ -26,8 +26,8 @@ ENV NODE_ENV=production
 ENV PORT=3000
 
 # Copy package manifests and install only production dependencies
-COPY package.json ./
-RUN npm install --omit=dev && npm install -g tsx
+COPY package.json package-lock.json* ./
+RUN (npm ci --omit=dev || npm install --omit=dev --legacy-peer-deps) && npm install -g tsx
 
 # Copy built frontend assets and backend source
 COPY --from=builder /app/dist ./dist
